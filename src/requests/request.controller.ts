@@ -8,8 +8,6 @@ export class RequestController {
   @Post()
   sendRequest(@Body() { body: { type, message } }: any): Promise<void> {
     try {
-      console.log('type: ', type);
-      console.log('message: ', message);
       return this.requestService.sendRequest(type, message);
     } catch (err) {
       throw err;
