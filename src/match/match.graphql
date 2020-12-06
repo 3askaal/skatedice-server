@@ -1,0 +1,21 @@
+type MatchPlayer {
+  player: User
+  letters: Int
+}
+
+type MatchTurn {
+  player: User
+  trick: Trick
+  good: [User]
+  fail: [User]
+}
+
+type Match {
+  word: String!
+  players: [MatchPlayer]!
+  current: User!
+  turns: [MatchTurn]!
+  winner: User
+  status: String
+  tournament: Tournament
+}

@@ -1,0 +1,31 @@
+type UserMate {
+  mate: User!
+  status: String!
+}
+
+type UserStats {
+  w: Int!
+  l: Int!
+  xp: Int!
+}
+
+type User {
+  username: String!
+  email: String!
+  password: String!
+  mates: [UserMate]
+  stats: UserStats!
+}
+
+type UserInput {
+  username: String!
+  email: String!
+  password: String!
+  passwordConfirm: String!
+}
+
+type Mutation {
+  getAll: User[]
+  get(userId: String!): User
+  createUser(input: UserInput!): User!
+}

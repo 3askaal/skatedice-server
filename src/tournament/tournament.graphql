@@ -1,0 +1,7 @@
+type Tournament {
+  name: String!
+  word: String!
+  players: [User]!
+  matches: [Match]!
+  winner: User
+}

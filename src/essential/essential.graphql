@@ -1,0 +1,6 @@
+type Essential {
+  name: String!
+  difficulty: Int!
+  rotation: Int
+  direction: String
+}
