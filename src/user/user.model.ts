@@ -8,7 +8,7 @@ const UserSchema = new Schema({
   mates: [
     {
       mate: { type: String, ref: 'User' },
-      status: Number,
+      status: String,
       _id: false,
     },
   ],
