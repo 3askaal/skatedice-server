@@ -15,6 +15,7 @@ import { RequestService } from 'src/requests/request.service';
 import { RequestModule } from 'src/requests/request.module';
 import { MatchService } from 'src/match/match.service';
 import { TournamentService } from 'src/tournament/tournament.service';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
   imports: [
@@ -27,7 +28,8 @@ import { TournamentService } from 'src/tournament/tournament.service';
       definitions: {
         path: join(process.cwd(), 'src/graphql.ts'),
       },
-    })
+    }),
+    TypeOrmModule.forRoot()
   ],
   controllers: [AppController],
   providers: [AppService, EssentialService, TrickService, RequestService],
