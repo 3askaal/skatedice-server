@@ -28,6 +28,7 @@
     "@nestjs/graphql": "^7.9.1",
     "@nestjs/platform-express": "^7.0.0",
     "@nestjs/typeorm": "^7.1.5",
+    "@types/lodash": "^4.14.165",
     "@types/mongoose": "^5.7.27",
     "@types/nodemailer": "^6.4.0",
     "apollo-server-express": "^2.19.0",
