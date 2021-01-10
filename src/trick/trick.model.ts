@@ -1,14 +1,19 @@
-import { Schema, model } from 'mongoose';
-import { ITrickDoc } from './trick';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Document, Types } from 'mongoose';
+import { Essential } from '../essential/essential.model'
 
-const TrickSchema = new Schema({
-  position: { type: String, default: 'r' },
-  essential: { type: String, ref: 'Essential' },
-  rotation: Number,
-  direction: String,
-  tags: [{ type: String, ref: 'Tag' }],
-  difficulty: Number,
-  twisted: Boolean,
-});
+@Schema()
+export class Trick {
+  _id: Types.ObjectId;
+  @Prop() position: string;
+  @Prop() essential: Essential;
+  @Prop() rotation: number;
+  @Prop() direction: string;
+  @Prop() tags: string[];
+  @Prop() difficulty: number;
+  @Prop() twisted: boolean;
+}
 
-export const TrickModel = model<ITrickDoc>('Trick', TrickSchema);
+export type TrickDocument = Trick & Document;
+
+export const TrickSchema = SchemaFactory.createForClass(Trick);

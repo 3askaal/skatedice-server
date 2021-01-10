@@ -1,20 +1,24 @@
 import { Injectable } from '@nestjs/common';
-import { EssentialModel } from './essential.model';
-import { TrickService } from 'src/trick/trick.service';
-import { TrickModel } from 'src/trick/trick.model';
+import { InjectModel } from '@nestjs/mongoose';
+import { Essential, EssentialDocument } from './essential.model';
+import { Trick, TrickDocument } from 'src/trick/trick.model';
 import { IEssential, IEssentialDoc } from './essential';
 import { createTricksBasedOnEssential } from 'src/trick/trick.helpers';
+import { Model } from 'mongoose';
 
 @Injectable()
 export class EssentialService {
-  constructor(private readonly trickService: TrickService) {}
+  constructor(
+    @InjectModel(Essential.name) private essentialModel: Model<EssentialDocument>,
+    @InjectModel(Trick.name) private trickModel: Model<TrickDocument>,
+  ) {}
 
   async getAll(): Promise<IEssential[]> {
-    return EssentialModel.find();
+    return this.essentialModel.find();
   }
 
   async create(payload: IEssential[]): Promise<IEssentialDoc[]> {
-    const essentials: any = await EssentialModel.create(payload);
+    const essentials: any = await this.essentialModel.create(payload);
 
     essentials.forEach((item: IEssentialDoc) => {
       createTricksBasedOnEssential(item);
@@ -24,12 +28,12 @@ export class EssentialService {
   }
 
   async delete(id: string) {
-    await EssentialModel.findByIdAndRemove(id);
-    await TrickModel.find({ essential: id }).remove();
+    await this.essentialModel.findByIdAndRemove(id);
+    await this.trickModel.find({ essential: id }).remove();
   }
 
   async deleteAll() {
-    await EssentialModel.deleteMany({});
-    await TrickModel.deleteMany({});
+    await this.essentialModel.deleteMany({});
+    await this.trickModel.deleteMany({});
   }
 }

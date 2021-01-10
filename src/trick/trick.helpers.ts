@@ -1,17 +1,17 @@
-import { ITrickDoc, ITrick } from './trick';
+import { ITrick } from './trick';
 import { IEssentialDoc, IEssential } from 'src/essential/essential';
 import { POSITIONS, ROTATIONS, DIRECTIONS } from './trick.constants';
-import { TrickModel } from './trick.model';
+import { Trick } from './trick.model';
 
 export function createTricksBasedOnEssential(essential: IEssentialDoc): void {
   POSITIONS.forEach(position => {
     ROTATIONS.forEach(async rotation => {
       if (rotation) {
         DIRECTIONS.forEach(async direction => {
-          await TrickModel.create<ITrick>(createTrickDoc(essential, position, rotation, direction));
+          await Trick.create<ITrick>(createTrickDoc(essential, position, rotation, direction));
         });
       } else {
-        await TrickModel.create<ITrick>(createTrickDoc(essential, position));
+        await Trick.create<ITrick>(createTrickDoc(essential, position));
       }
     });
   });

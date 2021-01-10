@@ -1,14 +1,14 @@
-import { Schema, model } from 'mongoose';
-import { IEssentialDoc } from './essential';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Document, Types } from 'mongoose';
+@Schema()
+export class Essential {
+  _id: Types.ObjectId;
+  @Prop() name: string;
+  @Prop() difficulty: string;
+  @Prop() rotation: string;
+  @Prop() direction: string;
+}
 
-const EssentialSchema = new Schema({
-  name: { type: String, required: true },
-  difficulty: { type: Number, required: true },
-  rotation: { type: Number },
-  direction: { type: String },
-});
+export type EssentialDocument = Essential & Document;
 
-export const EssentialModel = model<IEssentialDoc>(
-  'Essential',
-  EssentialSchema,
-);
+export const EssentialSchema = SchemaFactory.createForClass(Essential);
