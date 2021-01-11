@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { InjectModel } from '@nestjs/mongoose';
+import { MongooseModule, InjectModel } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { EssentialModule } from 'src/essential/essential.module';
@@ -8,10 +8,11 @@ import { TrickModule } from 'src/trick/trick.module';
 import { EssentialService } from 'src/essential/essential.service';
 import { TrickService } from 'src/trick/trick.service';
 import { ESSENTIALS } from 'src/essential/essential.constants';
-import { Essential, EssentialDocument } from 'src/essential/essential.model';
-import { Trick, TrickDocument } from 'src/trick/trick.model';
+import { Essential, EssentialDocument, EssentialSchema } from 'src/essential/essential.model';
+import { Trick, TrickDocument, TrickSchema } from 'src/trick/trick.model';
 import { RequestService } from 'src/requests/request.service';
 import { RequestModule } from 'src/requests/request.module';
+import { CONFIG } from 'src/config';
 import { Model } from 'mongoose';
 
 @Module({
@@ -20,6 +21,9 @@ import { Model } from 'mongoose';
     TrickModule,
     RequestModule,
     ConfigModule.forRoot(),
+    MongooseModule.forRoot(CONFIG.MONGODB_URI),
+    MongooseModule.forFeature([{ name: Essential.name, schema: EssentialSchema }]),
+    MongooseModule.forFeature([{ name: Trick.name, schema: TrickSchema }]),
   ],
   controllers: [AppController],
   providers: [AppService, EssentialService, TrickService, RequestService],

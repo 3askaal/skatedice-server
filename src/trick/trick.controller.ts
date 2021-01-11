@@ -1,13 +1,13 @@
 import { Controller, Get, Query } from '@nestjs/common';
 import { TrickService } from './trick.service';
-import { ITrick } from './trick';
+import { Trick } from './trick.model';
 
 @Controller('tricks')
 export class TrickController {
   constructor(private readonly trickService: TrickService) {}
 
   @Get()
-  getAll(@Query() {}: any): Promise<ITrick[]> {
+  getAll(@Query() {}: any): Promise<Trick[]> {
     try {
       return this.trickService.getAll();
     } catch (err) {

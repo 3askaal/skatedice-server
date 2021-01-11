@@ -887,10 +887,6 @@
     multimatch "^5.0.0"
     typescript "~4.1.2"
 
-"@types/@nestjs/mongoose":
-  version "7.2.1"
-  resolved "https://codeload.github.com/nestjs/mongoose/tar.gz/7af28bb4b120874c09d59c91426cd0f725b911be"
-
 "@types/accepts@*", "@types/accepts@^1.3.5":
   version "1.3.5"
   resolved "https://registry.yarnpkg.com/@types/accepts/-/accepts-1.3.5.tgz#c34bec115cfc746e04fe5a059df4ce7e7b391575"

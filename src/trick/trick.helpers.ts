@@ -1,24 +1,8 @@
-import { ITrick } from './trick';
-import { IEssentialDoc, IEssential } from 'src/essential/essential';
-import { POSITIONS, ROTATIONS, DIRECTIONS } from './trick.constants';
+import { Essential } from 'src/essential/essential.model';
 import { Trick } from './trick.model';
 
-export function createTricksBasedOnEssential(essential: IEssentialDoc): void {
-  POSITIONS.forEach(position => {
-    ROTATIONS.forEach(async rotation => {
-      if (rotation) {
-        DIRECTIONS.forEach(async direction => {
-          await Trick.create<ITrick>(createTrickDoc(essential, position, rotation, direction));
-        });
-      } else {
-        await Trick.create<ITrick>(createTrickDoc(essential, position));
-      }
-    });
-  });
-}
-
-function createTrickDoc(
-  essential: IEssentialDoc,
+export function createTrickDoc(
+  essential: Essential,
   position: string,
   rotation?: number,
   direction?: string,
@@ -40,8 +24,8 @@ function createTrickDoc(
   };
 }
 
-function modifyDifficulty(essential: IEssential, position: string, rotation: number): number {
-  let difficulty = essential.difficulty;
+function modifyDifficulty(essential: Essential, position: string, rotation: number): number {
+  let difficulty: number = essential.difficulty;
 
   if (position === 'n' || position === 's') {
     difficulty += 2;
@@ -54,11 +38,11 @@ function modifyDifficulty(essential: IEssential, position: string, rotation: num
   return difficulty;
 }
 
-export function formatTrick(trickDoc: ITrick): ITrick {
+export function formatTrick(trickDoc: Trick): Trick {
   const trick: any = {
     ...trickDoc,
     essential: {
-      ...(trickDoc.essential as IEssential),
+      ...trickDoc.essential,
     },
   };
 

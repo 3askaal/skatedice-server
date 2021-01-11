@@ -4,7 +4,7 @@ import { Document, Types } from 'mongoose';
 export class Essential {
   _id: Types.ObjectId;
   @Prop() name: string;
-  @Prop() difficulty: string;
+  @Prop() difficulty: number;
   @Prop() rotation: string;
   @Prop() direction: string;
 }

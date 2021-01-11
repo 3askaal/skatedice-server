@@ -1,13 +1,13 @@
 import { Controller, Get, Body, Post } from '@nestjs/common';
 import { EssentialService } from './essential.service';
-import { IEssential, IEssentialDoc } from './essential';
+import { Essential } from './essential.model';
 
 @Controller('essentials')
 export class EssentialController {
   constructor(private readonly essentialService: EssentialService) {}
 
   @Get()
-  async getAll(): Promise<IEssential[]> {
+  async getAll(): Promise<Essential[]> {
     try {
       return this.essentialService.getAll();
     } catch (err) {
@@ -16,7 +16,7 @@ export class EssentialController {
   }
 
   @Post()
-  async create(@Body() payload: IEssential[]): Promise<IEssentialDoc[]> {
+  async create(@Body() payload: Essential[]): Promise<Essential[]> {
     try {
       return this.essentialService.create(payload);
     } catch (err) {
