@@ -28,7 +28,7 @@
     "@nestjs/platform-express": "^7.0.0",
     "@types/mongoose": "^5.7.27",
     "@types/nodemailer": "^6.4.0",
-    "forever": "^3.0.0",
+    "forever": "^4.0.1",
     "mongoose": "^5.9.20",
     "nodemailer": "^6.4.10",
     "reflect-metadata": "^0.1.13",
